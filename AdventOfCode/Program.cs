@@ -1,4 +1,5 @@
-﻿using AoCHelper;
+﻿using System.Linq;
+using AoCHelper;
 
 if (args.Length == 0)
 {
