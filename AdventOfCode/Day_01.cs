@@ -1,18 +1,47 @@
-﻿using AoCHelper;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using AoCHelper;
 
 namespace AdventOfCode
 {
+    
     public class Day_01 : BaseDay
     {
-        private readonly string _input;
+        private readonly List<int> numbers;
 
         public Day_01()
         {
-            _input = File.ReadAllText(InputFilePath);
+            numbers = File.ReadAllText(InputFilePath).Split('\n').Select(int.Parse).ToList<int>();
+
         }
 
-        public override ValueTask<string> Solve_1() => new($"Solution to {ClassPrefix} {CalculateIndex()}, part 1");
+        public override ValueTask<string> Solve_1() {
+            var lastNumber = 99999999;
+            var counter = 0;
+            foreach(var n1 in numbers) {
+                if (n1 > lastNumber) counter++;
+                lastNumber = n1;
+            }
 
-        public override ValueTask<string> Solve_2() => new($"Solution to {ClassPrefix} {CalculateIndex()}, part 2");
+            return new ValueTask<string>(counter.ToString()); //1692
+        }
+        
+
+        public override ValueTask<string> Solve_2(){
+            var counter = numbers.Skip(3)
+                .Select((x,index) => x+numbers[index+3]+numbers[index+2]>numbers[index+3]+numbers[index+2]+numbers[index]? 1 : 0)
+                .Sum();
+
+            // int counter =0;
+            // for (int i = 3; i <numbers.Count; i++) {
+            //     var A = numbers[i-3] + numbers[i-2] + numbers[i-1];
+            //     var B = numbers[i-2] + numbers[i-1] + numbers[i];
+            //     if (B > A) counter ++;
+            // }
+
+            return new ValueTask<string>(counter.ToString()); //1724
+        }
     }
 }
