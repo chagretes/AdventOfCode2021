@@ -1,4 +1,4 @@
-![c#](https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white) [![CI](https://github.com/chagretes/AdventOfCode2021/actions/workflows/ci.yml/badge.svg)](https://github.com/chagretes/AdventOfCode2021/actions/workflows/ci.yml)
+[![CI](https://github.com/chagretes/AdventOfCode2021/actions/workflows/ci.yml/badge.svg)](https://github.com/chagretes/AdventOfCode2021/actions/workflows/ci.yml)
 
 # 🎄 AdventOfCode 🎄
 Repository with my answers to [AdventOfCode](https://adventofcode.com/). They're not the best possible, but they were the ones I built the fastest.
