@@ -6,74 +6,66 @@ using AoCHelper;
 
 namespace AdventOfCode
 {
-    public class Rule{
-        public int min;
-        public int max;
-        public char letter;
+    public class Command {
+        public string direction;
+        public int value;
     }
     public class Day_02 : BaseDay
     {
-        private readonly List<string> passwords = new List<string>();
-        private readonly List<Rule> rules = new List<Rule>();
+        private readonly List<Command> commands;
 
         public Day_02()
         {
-            var lines = File.ReadAllText(InputFilePath).Split('\n');
-            foreach (var line in lines)
-            {
-                var line_ = line.Split(": ");
-                passwords.Add(line_[1]);
-
-                var minMaxLetter = line_[0].Split(" ");
-
-                rules.Add(new Rule{
-                    min = int.Parse(minMaxLetter[0].Split('-')[0]),
-                    max = int.Parse(minMaxLetter[0].Split('-')[1]),
-                    letter = minMaxLetter[1][0]
-                });
-            }
+            commands = File.ReadAllText(InputFilePath).Split('\n').Select(x => new Command{
+                direction = x.Split(" ")[0],
+                value = int.Parse(x.Split(" ")[1])
+            }).ToList();
         }
 
         public override ValueTask<string> Solve_1() {
-            int i = 0;
-            int a = 0;
-            foreach(var password in passwords)
-            {
-                var rule = rules[i];
-                var count = password.Count(x => x == rule.letter);
-                if (count >= rule.min && count <= rule.max)
-                {
-                    a++;
-                }
-                i++;
-            } 
-            return new ValueTask<string>(a.ToString());
+            int horizontal=0;
+            int depth=0;
+            foreach(var command in commands) {
+                switch (command.direction)  {
+                    case "forward":
+                        horizontal+= command.value;
+                        break;
+                    case "down":
+                        depth+= command.value;
+                        break;
+                    default:
+                        depth-= command.value;
+                        break;
+                };
+            }
+
+            var result = horizontal*depth;
+
+            return new ValueTask<string>(result.ToString());
         }
         
 
         public override ValueTask<string> Solve_2(){
-            int i = 0;
-            int a = 0;
-            foreach(var password in passwords)
-            {
-                var rule = rules[i];
-                
-                var count = 0;
-                if (password[rule.min - 1] == rule.letter)
-                {
-                    count++;
-                }
-                if (password[rule.max - 1] == rule.letter)
-                {
-                    count++;
-                }
-                if (count == 1)
-                {
-                    a++;
-                }
-                i++;
-            } 
-            return new ValueTask<string>(a.ToString());
+            int horizontal=0,depth=0,aim=0;
+
+            foreach(var command in commands) {
+                switch (command.direction)  {
+                    case "forward":
+                        horizontal+= command.value;
+                        depth += aim*command.value;
+                        break;
+                    case "down":
+                        aim+= command.value;
+                        break;
+                    default:
+                        aim-= command.value;
+                        break;
+                };
+            }
+
+            var result = horizontal*depth;
+
+            return new ValueTask<string>(result.ToString());
         }
     }
 }
