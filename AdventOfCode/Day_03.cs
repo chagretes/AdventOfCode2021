@@ -8,10 +8,6 @@ using AoCHelper;
 
 namespace AdventOfCode
 {
-    public class Command2 {
-        public string direction;
-        public int value;
-    }
     public class Day_03 : BaseDay
     {
         private readonly List<string> numbers;
@@ -22,34 +18,34 @@ namespace AdventOfCode
         }
 
         public override ValueTask<string> Solve_1() {
-            // int[] vector1 = new int[]{0,0,0,0,0,0,0,0,0,0,0,0};
-            // foreach (var number in numbers) {
-            //     for(int i = 0; i<12;i++){
-            //         if (number[i]=='1') vector1[i]++;
-            //     }
-            // }
-            // bool[] gama = new bool[12];
-            // bool[] epsilon= new bool[12];
-            // int[] gamai = new int[12];
-            // for(int i = 0; i<12;i++){
-            //     if(numbers.Count-vector1[i]<vector1[i]){
-            //         gama[i] = true;
-            //         epsilon[i] = false;
-            //         gamai[i] = 1;
-            //     } else {
-            //         gama[i] = false;
-            //         epsilon[i] = true;
-            //     }
-            // }
+            int[] vector1 = new int[]{0,0,0,0,0,0,0,0,0,0,0,0};
+            foreach (var number in numbers) {
+                for(int i = 0; i<12;i++){
+                    if (number[i]=='1') vector1[i]++;
+                }
+            }
+            bool[] gama = new bool[12];
+            bool[] epsilon= new bool[12];
+            int[] gamai = new int[12];
+            for(int i = 0; i<12;i++){
+                if(numbers.Count-vector1[i]<vector1[i]){
+                    gama[i] = true;
+                    epsilon[i] = false;
+                    gamai[i] = 1;
+                } else {
+                    gama[i] = false;
+                    epsilon[i] = true;
+                }
+            }
 
-            // if (BitConverter.IsLittleEndian){
-            //     Array.Reverse(gama);
-            //     Array.Reverse(epsilon);
-            // }
+            if (BitConverter.IsLittleEndian){
+                Array.Reverse(gama);
+                Array.Reverse(epsilon);
+            }
 
-            // int result = getIntFromBitArray(new BitArray(gama))*getIntFromBitArray(new BitArray(epsilon));
+            int result = getIntFromBitArray(new BitArray(gama))*getIntFromBitArray(new BitArray(epsilon));
 
-            return new ValueTask<string>("result".ToString());
+            return new ValueTask<string>(result.ToString());
         }
 
         private int getIntFromBitArray(BitArray bitArray)
