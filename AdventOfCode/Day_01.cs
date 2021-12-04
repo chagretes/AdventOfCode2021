@@ -25,23 +25,20 @@ namespace AdventOfCode
                 lastNumber = n1;
             }
 
-            return new ValueTask<string>(counter.ToString()); //1692
+            return new ValueTask<string>(counter.ToString()); 
         }
         
 
         public override ValueTask<string> Solve_2(){
-            var counter = numbers.Skip(3)
-                .Select((x,index) => x+numbers[index+3]+numbers[index+2]>numbers[index+3]+numbers[index+2]+numbers[index]? 1 : 0)
-                .Sum();
 
-            // int counter =0;
-            // for (int i = 3; i <numbers.Count; i++) {
-            //     var A = numbers[i-3] + numbers[i-2] + numbers[i-1];
-            //     var B = numbers[i-2] + numbers[i-1] + numbers[i];
-            //     if (B > A) counter ++;
-            // }
+            int counter =0;
+            for (int i = 3; i <numbers.Count; i++) {
+                var A = numbers[i-3] + numbers[i-2] + numbers[i-1];
+                var B = numbers[i-2] + numbers[i-1] + numbers[i];
+                if (B > A) counter ++;
+            }
 
-            return new ValueTask<string>(counter.ToString()); //1724
+            return new ValueTask<string>(counter.ToString());
         }
     }
 }
