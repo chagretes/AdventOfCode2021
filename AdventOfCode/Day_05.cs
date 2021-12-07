@@ -84,7 +84,7 @@ namespace AdventOfCode
                 } else if (line.ex == line.sx && line.ey==line.sy)
                 {
                     Console.WriteLine("asd");
-                }
+                }   
                 
             }
 
