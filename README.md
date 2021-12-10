@@ -8,7 +8,7 @@ I plan to do past years as well, and I'm going to keep each branch (2021, 2020) 
 # Status
 | Year | Status |
 |------|--------|
-| 2020 | 2 🌟 |
+| 2020 |11 🌟 |
 | 2021 | 4 🌟 |
 
 # Template
